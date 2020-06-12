@@ -69,6 +69,25 @@ EOREMARKUP
       'https://php.net/manual/timezones.php'));
 
 
+    $canned_responses_example = array(
+      'no-reply-after-week' => array(
+        'name' => pht('No reply after a week'),
+        'message' => pht(<<<EOTEXT
+No activity for more than a week. As per the tracker policy we assume
+the issue is gone and can be closed.\n\nThanks again for the report.
+If the problem persists please open a new report with the required information.
+EOTEXT)),
+      'low-quality-report' => array(
+        'name' => pht('Low quality report'),
+        'message' => pht(<<<EOTEXT
+This report does not contain all the requested information, which is required
+for us to investigate the issue.\n\nPlease submit a new report and carefully
+follow the instructions.
+EOTEXT)));
+
+    $json = new PhutilJSON();
+    $canned_responses_example = $json->encodeFormatted($canned_responses_example);
+
     return array(
       $this->newOption('phabricator.base-uri', 'string', null)
         ->setLocked(true)
@@ -238,6 +257,9 @@ EOREMARKUP
         ->setLocked(true)
         ->setDescription(
           pht('Customized settings for Phabricator applications.')),
+      $this->newOption('maniphest.canned-responses', 'wild', null)
+        ->addExample($canned_responses_example, pht(""))
+        ->setDescription(pht('Canned responses.')),
       $this->newOption('phabricator.cache-namespace', 'string', 'phabricator')
         ->setLocked(true)
         ->setDescription(pht('Cache namespace.')),

@@ -26,6 +26,17 @@ final class PhabricatorRemarkupControl extends AphrontFormTextAreaControl {
     return $this->canPin;
   }
 
+  public function getCannedResponses()
+  {
+    return PhabricatorEnv::getEnvConfig('maniphest.canned-responses');
+  }
+
+  public function getCanCannedResponses()
+  {
+    $canned_responses = $this->getCannedResponses();
+    return $canned_responses != null;
+  }
+
   public function setSendOnEnter($soe) {
     $this->sendOnEnter = $soe;
     return $this;
@@ -89,6 +100,7 @@ final class PhabricatorRemarkupControl extends AphrontFormTextAreaControl {
           'URL' => pht('URL'),
           'key-help' => pht('Pin or unpin the comment form.'),
         ),
+        'cannedResponses' => $this->getCannedResponses(),
         'canPin' => $this->getCanPin(),
         'disabled' => $this->getDisabled(),
         'sendOnEnter' => $this->getSendOnEnter(),
@@ -235,6 +247,13 @@ final class PhabricatorRemarkupControl extends AphrontFormTextAreaControl {
     if ($this->getCanPin()) {
       $mode_actions['fa-thumb-tack'] = array(
         'tip' => pht('Pin Form On Screen'),
+        'align' => 'right',
+      );
+    }
+
+    if ($this->getCanCannedResponses()) {
+      $mode_actions['fa-reply'] = array(
+        'tip' => pht('Canned Responses'),
         'align' => 'right',
       );
     }

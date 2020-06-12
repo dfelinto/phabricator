@@ -2226,6 +2226,7 @@ phutil_register_library_map(array(
     'PhabricatorApplicationSearchResultView' => 'applications/search/view/PhabricatorApplicationSearchResultView.php',
     'PhabricatorApplicationTestCase' => 'applications/base/__tests__/PhabricatorApplicationTestCase.php',
     'PhabricatorApplicationTransaction' => 'applications/transactions/storage/PhabricatorApplicationTransaction.php',
+    'PhabricatorApplicationTransactionCannedResponsesController' => 'applications/transactions/controller/PhabricatorApplicationTransactionCannedResponsesController.php',
     'PhabricatorApplicationTransactionComment' => 'applications/transactions/storage/PhabricatorApplicationTransactionComment.php',
     'PhabricatorApplicationTransactionCommentEditController' => 'applications/transactions/controller/PhabricatorApplicationTransactionCommentEditController.php',
     'PhabricatorApplicationTransactionCommentEditor' => 'applications/transactions/editor/PhabricatorApplicationTransactionCommentEditor.php',
@@ -8538,6 +8539,7 @@ phutil_register_library_map(array(
       'PhabricatorPolicyInterface',
       'PhabricatorDestructibleInterface',
     ),
+    'PhabricatorApplicationTransactionCannedResponsesController' => 'PhabricatorApplicationTransactionController',
     'PhabricatorApplicationTransactionComment' => array(
       'PhabricatorLiskDAO',
       'PhabricatorMarkupInterface',

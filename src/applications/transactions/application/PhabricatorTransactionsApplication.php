@@ -35,6 +35,8 @@ final class PhabricatorTransactionsApplication extends PhabricatorApplication {
           => 'PhabricatorApplicationTransactionValueController',
         'remarkuppreview/'
           => 'PhabricatorApplicationTransactionRemarkupPreviewController',
+          'cannedresponses/'
+          => 'PhabricatorApplicationTransactionCannedResponsesController',
         'editengine/' => array(
           $this->getQueryRoutePattern()
             => 'PhabricatorEditEngineListController',

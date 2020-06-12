@@ -300,6 +300,9 @@ JX.behavior('phabricator-remarkup-assist', function(config) {
         // Now pin or unpin the area.
         set_pinned_mode(root, !pinned);
         break;
+      case 'fa-reply':
+        canned_responses(area, sel, r);
+        break;
 
     }
   }
@@ -348,6 +351,24 @@ JX.behavior('phabricator-remarkup-assist', function(config) {
       .setHandler(onupdate)
       .start();
   }
+
+function canned_responses(area, sel, r) {
+  var responses = JSON.stringify(config.cannedResponses);
+
+  var data = {
+    responses: responses
+  };
+
+  new JX.Workflow('/transactions/cannedresponses/', data)
+  .setHandler(function(response) {
+    update(
+        area,
+        '',
+        sel,
+        (r.start === 0 ? '' : '\n\n') + response.reply + '\n\n');
+    })
+    .start();
+}
 
   JX.DOM.listen(
     root,
